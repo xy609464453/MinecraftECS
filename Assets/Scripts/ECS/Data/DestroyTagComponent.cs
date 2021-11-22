@@ -1,7 +1,6 @@
 ﻿using System;
 using Unity.Entities;
 
-//
+[GenerateAuthoringComponent]
 [Serializable]
 public struct DestroyTag : IComponentData { }
-public class DestroyTagComponent : ComponentDataWrapper<DestroyTag> { }

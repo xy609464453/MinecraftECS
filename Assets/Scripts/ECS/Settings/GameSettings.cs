@@ -66,12 +66,12 @@ namespace Minecraft
             // This method creates archetypes for entities we will spawn frequently in this game.
             // Archetypes are optional but can speed up entity spawning substantially.
 
-            EntityManager manager = World.Active.GetOrCreateManager<EntityManager>();
+            EntityManager manager = World.DefaultGameObjectInjectionWorld.EntityManager;
 
             // Create an archetype for basic blocks.
             BlockArchetype = manager.CreateArchetype(
                 //typeof(TransformMatrix),
-                typeof(Position)
+                typeof(Translation)
                 //typeof(ColliderChecker)
             );
             //typeof(MeshInstanceRenderer));
@@ -80,7 +80,7 @@ namespace Minecraft
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         void Start()
         {
-            manager = World.Active.GetOrCreateManager<EntityManager>();
+            manager = World.DefaultGameObjectInjectionWorld.EntityManager;
             //entities = manager.CreateEntity(BlockArchetype);
             //Generate the world
             ChunkGenerator(ChunkBase);
@@ -178,10 +178,10 @@ namespace Minecraft
                             AddCollider(posTemp);
 
                             Entity entities = manager.CreateEntity(BlockArchetype);
-                            manager.SetComponentData(entities, new Position { Value = new int3(xBlock, yBlock, zBlock) });
+                            manager.SetComponentData(entities, new Translation { Value = new int3(xBlock, yBlock, zBlock) });
                             manager.AddComponentData(entities, new BlockTag {});
 
-                            manager.AddSharedComponentData(entities, new MeshInstanceRenderer
+                            manager.AddSharedComponentData(entities, new RenderMesh
                             {
                                 mesh = meshTemp,
                                 material = maTemp
@@ -216,9 +216,9 @@ namespace Minecraft
                 AddCollider(posTemp);
 
                 Entity entities = manager.CreateEntity(BlockArchetype);
-                manager.SetComponentData(entities, new Position { Value = new int3(xPos, i, zPos) });
+                manager.SetComponentData(entities, new Translation { Value = new int3(xPos, i, zPos) });
                 manager.AddComponentData(entities, new BlockTag { });
-                manager.AddSharedComponentData(entities, new MeshInstanceRenderer
+                manager.AddSharedComponentData(entities, new RenderMesh
                 {
                     mesh = blockMesh,
                     material = maTemp
@@ -239,10 +239,10 @@ namespace Minecraft
                                 AddCollider(posTemp);
 
                                 entities = manager.CreateEntity(BlockArchetype);
-                                manager.SetComponentData(entities, new Position { Value = new int3(j, i, k) });
+                                manager.SetComponentData(entities, new Translation { Value = new int3(j, i, k) });
                                 manager.AddComponentData(entities, new BlockTag { });
                                 //manager.AddComponentData(entities, new HasCollider { ColliderState = false });
-                                manager.AddSharedComponentData(entities, new MeshInstanceRenderer
+                                manager.AddSharedComponentData(entities, new RenderMesh
                                 {
                                     mesh = blockMesh,
                                     material = leavesMaterial
@@ -273,10 +273,10 @@ namespace Minecraft
 
             Quaternion rotation = Quaternion.Euler(0, 45, 0);
             Entity entities = manager.CreateEntity(BlockArchetype);
-            manager.SetComponentData(entities, new Position { Value = new int3(xPos, yPos, zPos) });
+            manager.SetComponentData(entities, new Translation { Value = new int3(xPos, yPos, zPos) });
             manager.AddComponentData(entities, new Rotation { Value = rotation });
             manager.AddComponentData(entities, new SurfacePlantTag { });
-            manager.AddSharedComponentData(entities, new MeshInstanceRenderer
+            manager.AddSharedComponentData(entities, new RenderMesh
             {
                 mesh = tallGrassMesh,
                 material = maTemp
@@ -300,8 +300,8 @@ namespace Minecraft
                 for (int j = 0; j < ranDice; j++)
                 {
                     Entity entities = manager.CreateEntity(BlockArchetype);
-                    manager.SetComponentData(entities, new Position { Value = new int3(xPos+i, yPos + 15, zPos+j) });
-                    manager.AddSharedComponentData(entities, new MeshInstanceRenderer
+                    manager.SetComponentData(entities, new Translation { Value = new int3(xPos+i, yPos + 15, zPos+j) });
+                    manager.AddSharedComponentData(entities, new RenderMesh
                     {
                         mesh = meshTemp,
                         material = maTemp
