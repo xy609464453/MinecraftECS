@@ -1,0 +1,32 @@
+{
+    "Show": true,
+    "Dependencies": [
+        "GlobalObjectId_V1-1-f19661c01bdcad546b54998aa9a0d08a-93214019566545601-0"
+    ],
+    "Components": [
+        {
+            "$type": "Unity.Build.Classic.ClassicBuildProfile, Unity.Build.Classic",
+            "$version": 1,
+            "Platform": "StandaloneWindows64",
+            "Configuration": 3
+        },
+        {
+            "$type": "Unity.Build.Common.GeneralSettings, Unity.Build",
+            "ProductName": "MinecraftDOTS",
+            "CompanyName": "Unity Technologies",
+            "Version": "0.1"
+        },
+        {
+            "$type": "Unity.Build.Classic.ClassicScriptingSettings, Unity.Build.Classic",
+            "ScriptingBackend": 2,
+            "Il2CppCompilerConfiguration": 1,
+            "UseIncrementalGC": false
+        },
+        {
+            "$type": "Unity.Build.Common.SceneList, Unity.Build",
+            "$version": 1,
+            "BuildCurrentScene": true,
+            "SceneInfos": []
+        }
+    ]
+}
